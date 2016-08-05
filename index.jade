@@ -1,0 +1,94 @@
+html
+	head
+		title @Heatmap practise
+		meta(charset='utf-8')
+		meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
+		link(rel="stylesheet" href="assets/css/main.css")
+		link(href='https://fonts.googleapis.com/css?family=Lato:400,100,300' rel='stylesheet' type='text/css')
+		link(href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css' rel="stylesheet")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js")
+		script(src="assets/js/appbase.js")
+		script(src='assets/js/jquery.cookie.js')
+		script(src="assets/js/heatmap.min.js")
+		script(src="assets/js/functions.js")
+		script(src="assets/js/connection.js")
+
+	body
+		div(id='noData')
+			p There is no any click in this session
+				br
+				i(class="fa fa-hand-paper-o fa-2x" aria-hidden="true")
+		div(id='mainContainer')
+			div(id="heatmapContainerWrapper")
+				div(id="heatmapContainer")
+
+			h1 Heatmap task
+			hr
+			div.wrapper
+				p Click button to know more information ...
+				a(href="#" id='getIP' title='Get PIP') Get public IP
+				a(href="#" id='getLOC' title='Get LOC') Get location
+				a(href="#" id='getBI' title='Get BI') Get browser information
+				
+				div.information
+
+		a(href="#" class='show notclicked' id='btn-show' title='Show Map') Show HeatMap
+
+		.legent
+			p Maximum Clicks - #[span(id='maxcount')]
+			//- p #[span(class='line') |] Current Click - #[span(id='count') 0]
+			p #[span(class='line') |] Current Session - #[span(id='session')]
+			p #[span(class='line') |] Choose Session 
+				select(id='choose-session')
+					option(disabled) Session #
+
+		
+
+		//- script(src="assets/js/heatmap.js")
+		script(src="//api-maps.yandex.ru/2.0/?load=package.standard&lang=ru-RU" type="text/javascript")
+		script(type="text/javascript" src="http://l2.io/ip.js?var=ip")
+		script(type='text/javascript').
+			$('#getIP').on('click', function(e){
+				e.preventDefault();
+				if($('.information').is(':hidden') || $('.information').html() == ''){
+					$('.information').slideToggle(700);
+					$('.information').empty();
+					$('.information').append('<p>Your public IP is <span>' + ip + '</span></p>');
+				}else if($('.information').is(':visible') || $('.information').html() != ''){
+					
+					$('.information').empty();
+					$('.information').append('<p>Your public IP is <span>' + ip + '</span></p>');
+				}
+			});
+			$('#getLOC').on('click', function(event){
+				event.preventDefault();
+				var geo = {
+					'city': ymaps.geolocation.city,
+					'region': ymaps.geolocation.region,
+					'country': ymaps.geolocation.country
+				};
+				if($('.information').is(':hidden') || $('.information').html() == ''){
+					$('.information').slideToggle(700);
+					$('.information').empty();
+					$('.information').append('<p>Your country is <span>' + geo.country + '</span>. What about region and city? Hmmm..<br>Your region is <span>' + geo.region + '</span> and city is <span>' + geo.city + '</span>.</p>');
+				}else if($('.information').is(':visible') || $('.information').html() != ''){
+					$('.information').empty();
+					$('.information').append('<p>Your country is <span>' + geo.country + '</span>. What about region and city? Hmmm..<br>Your region is <span>' + geo.region + '</span> and city is <span>' + geo.city + '</span>.</p>');
+				}
+			});
+			$('#getBI').on('click', function(eve){
+				eve.preventDefault();
+				var x = "<p>User-agent header sent: <br><span>" + navigator.userAgent + '</span></p>';
+				if($('.information').is(':hidden') || $('.information').html() == ''){
+					$('.information').slideToggle(700);
+					$('.information').empty();
+					$('.information').append(x);
+				}else if($('.information').is(':visible') || $('.information').html() != ''){
+					$('.information').empty();
+					$('.information').append(x);
+				}
+			});
+
+		
+
+			

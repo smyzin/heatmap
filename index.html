@@ -1,0 +1,86 @@
+
+<html>
+  <head>
+    <title>@Heatmap practise</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="assets/css/main.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,100,300" rel="stylesheet" type="text/css"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="assets/js/appbase.js"></script>
+    <script src="assets/js/jquery.cookie.js"></script>
+    <script src="assets/js/heatmap.min.js"></script>
+    <script src="assets/js/functions.js"></script>
+    <script src="assets/js/connection.js"></script>
+  </head>
+  <body>
+    <div id="noData">
+      <p>There is no any click in this session<br/><i aria-hidden="true" class="fa fa-hand-paper-o fa-2x"></i></p>
+    </div>
+    <div id="mainContainer">
+      <div id="heatmapContainerWrapper">
+        <div id="heatmapContainer"></div>
+      </div>
+      <h1>Heatmap task</h1>
+      <hr/>
+      <div class="wrapper">
+        <p>Click button to know more information ...</p><a href="#" id="getIP" title="Get PIP">Get public IP</a><a href="#" id="getLOC" title="Get LOC">Get location</a><a href="#" id="getBI" title="Get BI">Get browser information</a>
+        <div class="information"></div>
+      </div>
+    </div><a href="#" id="btn-show" title="Show Map" class="show notclicked">Show HeatMap</a>
+    <div class="legent">
+      <p>Maximum Clicks - <span id="maxcount"></span></p>
+      <p><span class="line">|</span> Current Session - <span id="session"></span></p>
+      <p><span class="line">|</span> Choose Session 
+        <select id="choose-session">
+          <option disabled="disabled">Session #</option>
+        </select>
+      </p>
+    </div>
+    <script src="//api-maps.yandex.ru/2.0/?load=package.standard&amp;lang=ru-RU" type="text/javascript"></script>
+    <script type="text/javascript" src="http://l2.io/ip.js?var=ip"></script>
+    <script type="text/javascript">
+      $('#getIP').on('click', function(e){
+      	e.preventDefault();
+      	if($('.information').is(':hidden') || $('.information').html() == ''){
+      		$('.information').slideToggle(700);
+      		$('.information').empty();
+      		$('.information').append('<p>Your public IP is <span>' + ip + '</span></p>');
+      	}else if($('.information').is(':visible') || $('.information').html() != ''){
+      		
+      		$('.information').empty();
+      		$('.information').append('<p>Your public IP is <span>' + ip + '</span></p>');
+      	}
+      });
+      $('#getLOC').on('click', function(event){
+      	event.preventDefault();
+      	var geo = {
+      		'city': ymaps.geolocation.city,
+      		'region': ymaps.geolocation.region,
+      		'country': ymaps.geolocation.country
+      	};
+      	if($('.information').is(':hidden') || $('.information').html() == ''){
+      		$('.information').slideToggle(700);
+      		$('.information').empty();
+      		$('.information').append('<p>Your country is <span>' + geo.country + '</span>. What about region and city? Hmmm..<br>Your region is <span>' + geo.region + '</span> and city is <span>' + geo.city + '</span>.</p>');
+      	}else if($('.information').is(':visible') || $('.information').html() != ''){
+      		$('.information').empty();
+      		$('.information').append('<p>Your country is <span>' + geo.country + '</span>. What about region and city? Hmmm..<br>Your region is <span>' + geo.region + '</span> and city is <span>' + geo.city + '</span>.</p>');
+      	}
+      });
+      $('#getBI').on('click', function(eve){
+      	eve.preventDefault();
+      	var x = "<p>User-agent header sent: <br><span>" + navigator.userAgent + '</span></p>';
+      	if($('.information').is(':hidden') || $('.information').html() == ''){
+      		$('.information').slideToggle(700);
+      		$('.information').empty();
+      		$('.information').append(x);
+      	}else if($('.information').is(':visible') || $('.information').html() != ''){
+      		$('.information').empty();
+      		$('.information').append(x);
+      	}
+      });
+    </script>
+  </body>
+</html>
