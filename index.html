@@ -39,8 +39,11 @@
       </p>
     </div>
     <script src="//api-maps.yandex.ru/2.0/?load=package.standard&amp;lang=ru-RU" type="text/javascript"></script>
-    <script type="text/javascript" src="http://l2.io/ip.js?var=ip"></script>
     <script type="text/javascript">
+      var ip;
+      function getIP(json) {
+      	ip = json.ip;
+      }
       $('#getIP').on('click', function(e){
       	e.preventDefault();
       	if($('.information').is(':hidden') || $('.information').html() == ''){
@@ -82,5 +85,6 @@
       	}
       });
     </script>
+    <script type="application/javascript" src="https://api.ipify.org?format=jsonp&amp;callback=getIP"></script>
   </body>
 </html>

@@ -46,8 +46,11 @@ html
 
 		//- script(src="assets/js/heatmap.js")
 		script(src="//api-maps.yandex.ru/2.0/?load=package.standard&lang=ru-RU" type="text/javascript")
-		script(type="text/javascript" src="http://l2.io/ip.js?var=ip")
 		script(type='text/javascript').
+			var ip;
+			function getIP(json) {
+				ip = json.ip;
+			}
 			$('#getIP').on('click', function(e){
 				e.preventDefault();
 				if($('.information').is(':hidden') || $('.information').html() == ''){
@@ -88,6 +91,7 @@ html
 					$('.information').append(x);
 				}
 			});
+		script(type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP")
 
 		
 
