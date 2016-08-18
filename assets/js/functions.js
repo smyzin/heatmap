@@ -102,7 +102,7 @@ $(document).ready(function() {
 					maxCountElement.innerHTML = maximumClicks;
 					heatmapInstance.setData(newData);
 				}
-			}, 300);
+			}, 500);
 
 		}
 	});

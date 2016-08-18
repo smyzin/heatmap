@@ -50,24 +50,21 @@ function writeData(max, heatData, num){
 
 getRecord = (num) =>
 {
-  appbaseCon.search({
-    type: 'coordinate',
-    body: {
-      query: {
-        "match" :
-          {
-            id : num
-          }
-      }
-    }
-  }).on('data', function(res) {
-  	console.log(res);
-  	var resData = JSON.stringify(res.hits.hits._source.data);
-	localStorage['coordinateBySession ' + num] = resData;
-	var clicks = JSON.stringify(res.hits.hits._source.clicks);
-  }).on('error', function(err) {
-    console.log("search error: ", err);
-  })
+	appbaseCon.get({
+		type: 'coordinate',
+		id : ip + '-' + num
+	}).on('data', function(res) {
+		if (res.found) {
+			var resData = JSON.stringify(res._source.data);
+			localStorage['coordinateBySession ' + num] = resData;
+			var clicks = JSON.stringify(res._source.clicks);
+			$.cookie('clicksFromDB', clicks, { expires: 7, path: '' });
+		}else{
+			console.log('Error');
+		};
+	}).on('error', function(err) {
+		console.log("search error: ", err);
+	})
 }
 
 
