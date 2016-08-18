@@ -30,7 +30,7 @@ html
 				a(href="#" id='getIP' title='Get PIP') Get public IP
 				a(href="#" id='getLOC' title='Get LOC') Get location
 				a(href="#" id='getBI' title='Get BI') Get browser information
-				
+
 				div.information
 
 		a(href="#" class='show notclicked' id='btn-show' title='Show Map') Show HeatMap
@@ -39,25 +39,18 @@ html
 			p Maximum Clicks - #[span(id='maxcount')]
 			//- p #[span(class='line') |] Current Click - #[span(id='count') 0]
 			p #[span(class='line') |] Current Session - #[span(id='session')]
-			p #[span(class='line') |] Choose Session 
+			p #[span(class='line') |] Choose Session
 				select(id='choose-session')
 					option(disabled) Session #
 
-		
-
-		//- script(src="assets/js/heatmap.js")
 		script(src="//api-maps.yandex.ru/2.0/?load=package.standard&lang=ru-RU" type="text/javascript")
 		script(type='text/javascript').
-			//- var ip;
-			//- function getIP(json) {
-			//- 	ip = json.ip;
-			//- }
 			$('#getIP').on('click', function(e){
 				e.preventDefault();
 				if($('.information').is(':hidden') || $('.information').html() == ''){
 					$('.information').slideToggle(700).empty().append('<p>Your public IP is <span>' + ip + '</span></p>');
 				}else if($('.information').is(':visible') || $('.information').html() != ''){
-					
+
 					$('.information').empty();
 					$('.information').append('<p>Your public IP is <span>' + ip + '</span></p>');
 				}
@@ -92,6 +85,6 @@ html
 			});
 		//- script(type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP")
 
-		
 
-			
+
+

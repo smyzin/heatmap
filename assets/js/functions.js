@@ -7,7 +7,7 @@ $(document).ready(function() {
 	var heatmapInstance = h337.create({
 		container: document.getElementById('heatmapContainer'),
 		radius: 35,
-		maxOpacity: .5, 
+		maxOpacity: .5,
 		blur: .75
 	});
 	/*			---HEATMAPJS END---			*/
@@ -35,7 +35,7 @@ $(document).ready(function() {
 			$('#choose-session option').last().attr('selected', 'selected');
 		};
 	}
-	
+
 	$(function(){
 		setInterval(function(){
 			if(!$('body').hasClass('shown')){
@@ -56,7 +56,7 @@ $(document).ready(function() {
 				};
 			}
 		}, 1000);
-		
+
 	});
 
 	$('.show').click(function(){
@@ -80,26 +80,31 @@ $(document).ready(function() {
 		}
 	});
 	$('#choose-session').click(function(){
-		var sessionValue = $( "#choose-session" ).val();
-		var newData = {};
-		getData(sessionValue);
+		console.log('click');
+		if('#choose-session  option:selected'){
 
-		setTimeout(function(){
-			if(localStorage['coordinateBySession ' + sessionValue] === undefined){
-				console.log("No data!!!");
-				$('#noData').show();
-				maxCountElement.innerHTML = 0;
-				heatmapInstance.setData(zerroData);
-			}else{
-				var newData = JSON.parse(localStorage['coordinateBySession ' + sessionValue]);
-				$('#noData').hide();
+			console.log('Selected');
 
-				var maximumClicks = $.cookie('clicksFromDB');
-				maxCountElement.innerHTML = maximumClicks;
-				heatmapInstance.setData(newData);
-				console.log('New paint');
-			}
-		}, 500);
+			var sessionValue = $( "#choose-session" ).val();
+			var newData = {};
+			getRecord(sessionValue);
+
+			setTimeout(function(){
+				if(localStorage['coordinateBySession ' + sessionValue] === undefined){
+					$('#noData').show();
+					maxCountElement.innerHTML = 0;
+					heatmapInstance.setData(zerroData);
+				}else{
+					var newData = JSON.parse(localStorage['coordinateBySession ' + sessionValue]);
+					$('#noData').hide();
+
+					var maximumClicks = $.cookie('clicksFromDB');
+					maxCountElement.innerHTML = maximumClicks;
+					heatmapInstance.setData(newData);
+				}
+			}, 300);
+
+		}
 	});
 
 });
