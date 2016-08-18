@@ -61,9 +61,10 @@ getRecord = (num) =>
       }
     }
   }).on('data', function(res) {
-  	var resData = JSON.stringify(res.hits.hits[0]._source.data);
+  	console.log(res);
+  	var resData = JSON.stringify(res.hits.hits._source.data);
 	localStorage['coordinateBySession ' + num] = resData;
-	var clicks = JSON.stringify(res.hits.hits[0]._source.clicks);
+	var clicks = JSON.stringify(res.hits.hits._source.clicks);
   }).on('error', function(err) {
     console.log("search error: ", err);
   })
