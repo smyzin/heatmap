@@ -33,7 +33,7 @@
     <div class="legent">
       <p>Maximum Clicks - <span id="maxcount"></span></p>
       <p><span class="line">|</span> Current Session - <span id="session"></span></p>
-      <p><span class="line">|</span> Choose Session 
+      <p><span class="line">|</span> Choose Session
         <select id="choose-session">
           <option disabled="disabled">Session #</option>
         </select>
@@ -41,10 +41,6 @@
     </div>
     <script src="//api-maps.yandex.ru/2.0/?load=package.standard&amp;lang=ru-RU" type="text/javascript"></script>
     <script type="text/javascript">
-      //- var ip;
-      //- function getIP(json) {
-      //- 	ip = json.ip;
-      //- }
       $('#getIP').on('click', function(e){
       	e.preventDefault();
       	if($('.information').is(':hidden') || $('.information').html() == ''){
@@ -52,7 +48,7 @@
       		$('.information').empty();
       		$('.information').append('<p>Your public IP is <span>' + ip + '</span></p>');
       	}else if($('.information').is(':visible') || $('.information').html() != ''){
-      		
+      
       		$('.information').empty();
       		$('.information').append('<p>Your public IP is <span>' + ip + '</span></p>');
       	}

@@ -22,7 +22,7 @@ var appbaseCon = new Appbase({
 
 function getData(num) {
 	var id = ip + '-' + num;
-	
+
 	appbaseCon.search({
 		type: "coordinate",
 		body: {
@@ -64,52 +64,25 @@ function writeData(max, heatData, num){
 	});
 }
 
-// function checkData(numvis, max, heatData){
-// 	appbaseCon.search({
-// 		type: "coordinate",
-// 		body: {
-// 			query: {
-// 				match_all: {}
-// 			}
-// 		}
-// 	}).on('data', function(res) {
-// 		for(var i = 0; i < res.hits.hits.length; i++){
-// 			if(res.hits.hits[i]['_id'] == ip){
-// 				updateData(numvis, max, heatData);
-// 				console.log("Data Update");
-// 				// console.log(res.hits.hits[i]._source.allVisits);
-// 			}else{
-// 				writeData(numvis, max, heatData);
-// 				console.log("Data Send")
-// 			}
-// 		}
-// 	}).on('error', function(err) {
-// 		console.log("search error: ", err);
-// 	})
-// }
-
-
-// function updateData(numvis, max, heatData){
-// 	var existData = getData();
-
-// 	var jsonObject = {
-// 		"maxClicks"		: max,
-// 		"session"		: {
-// 				numvis	: existData.data[{
-// 				numvis: [heatData.data]
-// 				}]
-// 		}
-// 	};
-
-// 	appbaseRef.update({
-// 		type: 'coordinate',
-// 		id: ip,
-// 		body: jsonObject
-// 	}).on('data', function(res) {
-// 		console.log("successfully updated: ", res);
-// 		console.log('"updateData" - no errors');
-// 	}).on('error', function(err) {
-// 		console.log("update document error: ", err);
-// 	})
-// }
+getRecord = (num) =>
+{
+  appbaseRef.search({
+    type: 'contact',
+    body: {
+      query: {
+        "match" :
+          {
+            id : num
+          }
+      }
+    }
+  }).on('data', function(res) {
+  	var resData = JSON.stringify(res.hits.hits[0]._source.data);
+  	localStorage['coordinateBySession ' + num] = resData;
+  	var clicks = JSON.stringify(res.hits.hits[0]._source.clicks);
+  	$.cookie('clicksFromDB', clicks, {expires: 7, path: '/'})
+  }).on('error', function(err) {
+    console.log("search error: ", err);
+  })
+}
 

@@ -7,7 +7,7 @@ $(document).ready(function() {
 	var heatmapInstance = h337.create({
 		container: document.getElementById('heatmapContainer'),
 		radius: 35,
-		maxOpacity: .5, 
+		maxOpacity: .5,
 		blur: .75
 	});
 	/*			---HEATMAPJS END---			*/
@@ -35,7 +35,7 @@ $(document).ready(function() {
 			$('#choose-session option').last().attr('selected', 'selected');
 		};
 	}
-	
+
 	$(function(){
 		setInterval(function(){
 			if(!$('body').hasClass('shown')){
@@ -56,7 +56,7 @@ $(document).ready(function() {
 				};
 			}
 		}, 1000);
-		
+
 	});
 
 	$('.show').click(function(){
@@ -82,7 +82,7 @@ $(document).ready(function() {
 	$('#choose-session').click(function(){
 		var sessionValue = $( "#choose-session" ).val();
 		var newData = {};
-		getData(sessionValue);
+		getRecord(sessionValue);
 
 		setTimeout(function(){
 			if(localStorage['coordinateBySession ' + sessionValue] === undefined){
