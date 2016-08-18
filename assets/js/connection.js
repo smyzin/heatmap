@@ -50,7 +50,7 @@ function writeData(max, heatData, num){
 
 getRecord = (num) =>
 {
-  appbaseRef.search({
+  appbaseCon.search({
     type: 'contact',
     body: {
       query: {
