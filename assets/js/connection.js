@@ -64,7 +64,6 @@ getRecord = (num) =>
   	var resData = JSON.stringify(res.hits.hits[0]._source.data);
 	localStorage['coordinateBySession ' + num] = resData;
 	var clicks = JSON.stringify(res.hits.hits[0]._source.clicks);
-    console.log("query result: ", res);
   }).on('error', function(err) {
     console.log("search error: ", err);
   })
