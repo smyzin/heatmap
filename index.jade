@@ -42,16 +42,12 @@ html
 				select(id='choose-session')
 					option(disabled) Session #
 
-
-
 		script(src="//api-maps.yandex.ru/2.0/?load=package.standard&lang=ru-RU" type="text/javascript")
 		script(type='text/javascript').
 			$('#getIP').on('click', function(e){
 				e.preventDefault();
 				if($('.information').is(':hidden') || $('.information').html() == ''){
-					$('.information').slideToggle(700);
-					$('.information').empty();
-					$('.information').append('<p>Your public IP is <span>' + ip + '</span></p>');
+					$('.information').slideToggle(700).empty().append('<p>Your public IP is <span>' + ip + '</span></p>');
 				}else if($('.information').is(':visible') || $('.information').html() != ''){
 
 					$('.information').empty();
@@ -86,6 +82,4 @@ html
 					$('.information').append(x);
 				}
 			});
-
-
 

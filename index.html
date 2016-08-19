@@ -42,44 +42,42 @@
     <script src="//api-maps.yandex.ru/2.0/?load=package.standard&amp;lang=ru-RU" type="text/javascript"></script>
     <script type="text/javascript">
       $('#getIP').on('click', function(e){
-      	e.preventDefault();
-      	if($('.information').is(':hidden') || $('.information').html() == ''){
-      		$('.information').slideToggle(700);
-      		$('.information').empty();
-      		$('.information').append('<p>Your public IP is <span>' + ip + '</span></p>');
-      	}else if($('.information').is(':visible') || $('.information').html() != ''){
-      
-      		$('.information').empty();
-      		$('.information').append('<p>Your public IP is <span>' + ip + '</span></p>');
-      	}
+        e.preventDefault();
+        if($('.information').is(':hidden') || $('.information').html() == ''){
+          $('.information').slideToggle(700).empty().append('<p>Your public IP is <span>' + ip + '</span></p>');
+        }else if($('.information').is(':visible') || $('.information').html() != ''){
+
+          $('.information').empty();
+          $('.information').append('<p>Your public IP is <span>' + ip + '</span></p>');
+        }
       });
       $('#getLOC').on('click', function(event){
-      	event.preventDefault();
-      	var geo = {
-      		'city': ymaps.geolocation.city,
-      		'region': ymaps.geolocation.region,
-      		'country': ymaps.geolocation.country
-      	};
-      	if($('.information').is(':hidden') || $('.information').html() == ''){
-      		$('.information').slideToggle(700);
-      		$('.information').empty();
-      		$('.information').append('<p>Your country is <span>' + geo.country + '</span>. What about region and city? Hmmm..<br>Your region is <span>' + geo.region + '</span> and city is <span>' + geo.city + '</span>.</p>');
-      	}else if($('.information').is(':visible') || $('.information').html() != ''){
-      		$('.information').empty();
-      		$('.information').append('<p>Your country is <span>' + geo.country + '</span>. What about region and city? Hmmm..<br>Your region is <span>' + geo.region + '</span> and city is <span>' + geo.city + '</span>.</p>');
-      	}
+        event.preventDefault();
+        var geo = {
+          'city': ymaps.geolocation.city,
+          'region': ymaps.geolocation.region,
+          'country': ymaps.geolocation.country
+        };
+        if($('.information').is(':hidden') || $('.information').html() == ''){
+          $('.information').slideToggle(700);
+          $('.information').empty();
+          $('.information').append('<p>Your country is <span>' + geo.country + '</span>. What about region and city? Hmmm..<br>Your region is <span>' + geo.region + '</span> and city is <span>' + geo.city + '</span>.</p>');
+        }else if($('.information').is(':visible') || $('.information').html() != ''){
+          $('.information').empty();
+          $('.information').append('<p>Your country is <span>' + geo.country + '</span>. What about region and city? Hmmm..<br>Your region is <span>' + geo.region + '</span> and city is <span>' + geo.city + '</span>.</p>');
+        }
       });
       $('#getBI').on('click', function(eve){
-      	eve.preventDefault();
-      	var x = "<p>User-agent header sent: <br><span>" + navigator.userAgent + '</span></p>';
-      	if($('.information').is(':hidden') || $('.information').html() == ''){
-      		$('.information').slideToggle(700);
-      		$('.information').empty();
-      		$('.information').append(x);
-      	}else if($('.information').is(':visible') || $('.information').html() != ''){
-      		$('.information').empty();
-      		$('.information').append(x);
-      	}
+        eve.preventDefault();
+        var x = "<p>User-agent header sent: <br><span>" + navigator.userAgent + '</span></p>';
+        if($('.information').is(':hidden') || $('.information').html() == ''){
+          $('.information').slideToggle(700);
+          $('.information').empty();
+          $('.information').append(x);
+        }else if($('.information').is(':visible') || $('.information').html() != ''){
+          $('.information').empty();
+          $('.information').append(x);
+        }
       });
     </script>
   </body>
