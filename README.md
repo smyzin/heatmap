@@ -1,6 +1,6 @@
 # Heatmap page by session
 
-#### Main features
+### Main features
 
  - Used clean JS (only jQuery lib)
  - Show clicks by session
@@ -8,7 +8,7 @@
  - Heat map (warm colors for most clickable places, cold for rare)
  - As DB used AppBase.io
 
-##### Used technologys
+#### Used technologys
 
  - Sass
  - Jade
